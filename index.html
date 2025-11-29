@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CIIT Training Institute</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="brand">CIIT Training Institute</div>
+    <nav>
+      <a href="#courses">Courses</a>
+      <a href="#future">Future</a>
+      <a href="#enroll">Enroll</a>
+      <a href="#placements">Placements</a>
+      <button id="themeToggle">🌙</button>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Learn. Build. Get Placed.</h1>
+    <p>Live projects + 100% job assurance</p>
+    <div class="cta">
+      <a href="#enroll" class="btn primary">Enroll Now</a>
+      <a href="#courses" class="btn">Explore Courses</a>
+    </div>
+  </section>
+
+  <main>
+    <!-- Courses -->
+    <section id="courses" class="block">
+      <h2>Our Courses</h2>
+      <input id="searchInput" type="text" placeholder=". MERN Stack search courses...">
+      <div id="courseGrid" class="grid">
+        <div class="card">.NET Full Stack</div>
+        <div class="card">Java Full Stack</div>
+        <div class="card">Python Full Stack</div>
+        <div class="card">MEAN Stack</div>
+        <div class="card">MERN Stack</div>
+        <div class="card">Software Testing</div>
+        <div class="card">Data Science & Analytics</div>
+        <div class="card">Digital Marketing</div>
+        <div class="card">Cloud Computing</div>
+        <div class="card">ReactJS</div>
+        <div class="card">Angular</div>
+        <div class="card">DBA</div>
+        <div class="card">RDBMS</div>
+        <div class="card">C++ Programming</div>
+        <div class="card">Real Time Project</div>
+      </div>
+    </section>
+
+    <!-- Future Directions -->
+    <section id="future" class="block">
+      <h2>Future Directions</h2>
+      <div class="info-grid">
+        <div class="card">Industry 4.0 & Innovation Centers</div>
+        <div class="card">Global Skill Development</div>
+        <div class="card">Placement Expansion</div>
+        <div class="card">Future‑Ready Vision</div>
+      </div>
+    </section>
+
+    <!-- Enrollment -->
+    <section id="enroll" class="block">
+      <h2>Enroll Now</h2>
+      <form id="enrollForm" class="form">
+        <input id="name" type="text" placeholder="Full Name" required>
+        <input id="email" type="email" placeholder="Email" required>
+        <input id="phone" type="tel" placeholder="Phone" required>
+        <select id="course" required>
+          <option value="">Select Course</option>
+          <option>.NET Full Stack</option>
+          <option>Java Full Stack</option>
+          <option>Python Full Stack</option>
+          <option>MEAN Stack</option>
+          <option>MERN Stack</option>
+          <option>Software Testing</option>
+          <option>Data Science & Analytics</option>
+          <option>Digital Marketing</option>
+          <option>Cloud Computing</option>
+          <option>ReactJS</option>
+          <option>Angular</option>
+          <option>DBA</option>
+          <option>RDBMS</option>
+          <option>C++ Programming</option>
+          <option>Real Time Project</option>
+        </select>
+        <button type="submit" class="btn primary">Submit</button>
+        <p id="formStatus"></p>
+      </form>
+    </section>
+
+    <!-- Placements -->
+    <section id="placements" class="block">
+      <h2>Placement Reports</h2>
+      <canvas id="placementChart"></canvas>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name of Student</th>
+              <th>Company</th>
+              <th>Technology</th>
+              <th>Package</th>
+            </tr>
+          </thead>
+          <tbody id="placementsTable">
+            <!-- संपूर्ण लिस्ट इथे टाकली आहे -->
+             <tr><td>Rupesh Dhabarde</td><td>Perpetituut Technosoft</td><td>Dot Net</td><td>6.2 LPA</td></tr>
+        <tr><td>Akshay Pawar</td><td>Rabbit & Tortoise</td><td>Dot Net</td><td>3.5 LPA</td></tr>
+        <tr><td>Pratiksha Phadatare</td><td>Rabbit & Tortoise</td><td>Dot Net</td><td>3.5 LPA</td></tr>
+        <tr><td>Akash Supelkar</td><td>Avenitrinnovative</td><td>Dot Net</td><td>3.5 LPA</td></tr>
+        <tr><td>Kishor Baradkar</td><td>Reflection & Global</td><td>Dot Net</td><td>3.2 LPA</td></tr>
+        <tr><td>Nilesh More</td><td>Height Technologies</td><td>Dot Net</td><td>4.5 LPA</td></tr>
+        <tr><td>Amey Ransingh</td><td>Verseno Solutions</td><td>Dot Net</td><td>4.5 UPA</td></tr>
+        <tr><td>Aditya Bhumkar</td><td>Sanwell Solutione</td><td>Dot Net</td><td>4.5 LPA</td></tr>
+        <tr><td>Sagar Masal</td><td>Kanis infotech</td><td>Dot Net</td><td>6.5 LPA</td></tr>
+        <tr><td>Omkar Pawar</td><td>Sankalp Computers & Systems</td><td>Dot Net</td><td>3.5 LPA</td></tr>
+        <tr><td>Sagar Nachanikar</td><td>MicroData Care</td><td>Dot Net</td><td>2.5 LPA</td></tr>
+        <tr><td>Rutupa Bodate</td><td>MicroData Care</td><td>Dot Net</td><td>2.4 LPA</td></tr>
+        <tr><td>Datta Shinde</td><td>Optical ARC</td><td>Front End Developer</td><td>2.18 LPA</td></tr>
+        <tr><td>Rutuja Jare</td><td>Cloud Point System Inc</td><td>Dot Net</td><td>2.4 LPA</td></tr>
+        <tr><td>Vaishnavi Bhagat</td><td>Montcrest</td><td>Dot Net</td><td>2.5 LPA</td></tr>
+        <tr><td>Sariket Bhujbal</td><td>Infosys</td><td>Dot Nel</td><td>4.3 LPA</td></tr>
+        <tr><td>Sourv Ghosh</td><td>Credence</td><td>Dot Net</td><td>4.20 LPA</td></tr>
+        <tr><td>Snehal</td><td>Snow White</td><td>MEAN Stack</td><td>4.5 LPA</td></tr>
+        <tr><td>Yogita Ghorad</td><td>Agilad Tecchnologies Pvt Ltd</td><td>Dot Net</td><td>2.5 LPA</td></tr>
+        <tr><td>Akash Bhujbal</td><td>Assentex</td><td>Dot Net</td><td>3.5 LPA</td></tr>
+
+
+
+
+            <!-- बाकी सर्व रेकॉर्ड्स याच पद्धतीने टाकले जातील -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 CIIT Training Institute — All rights reserved</p>
+    <p>Developed by <strong>Shravan Nikalje</strong></p>
+    <p>CIIT Training Institute Student</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
