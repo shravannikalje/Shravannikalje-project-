@@ -114,6 +114,17 @@ tr:nth-child(even) { background: rgba(0,0,0,0.03); }
 /* Footer */
 .footer {
   background: var(--dark);
+
+
+
+  .admission-legacy {
+  background: #0f172a;   /* dark background */
+  color: #FF0000;
+  padding: 8px 12px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  font-weight: bold;
+}
   color: var(--table-head-text);
   text-align: center;
   padding: 20px;
