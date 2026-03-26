@@ -2,6 +2,8 @@ const themeToggle = document.getElementById("themeToggle");
 const body = document.body;
 
 const ADMIN_STORAGE_KEY = "ciit-admin-pin";
+const API_BASE_URL = (window.CIIT_CONFIG?.apiBaseUrl || "").replace(/\/$/, "");
+const apiUrl = (path) => `${API_BASE_URL}${path}`;
 const IS_GITHUB_PAGES = window.location.hostname.endsWith("github.io");
 
 const adminLoginSection = document.getElementById("adminLoginSection");
@@ -42,8 +44,10 @@ themeToggle?.addEventListener("click", () => {
 });
 
 if (IS_GITHUB_PAGES) {
-	adminLoginStatus.textContent = "GitHub Pages वर backend APIs चालत नाहीत. Admin साठी http://localhost:3000/admin.html वापरा.";
-	adminLoginStatus.style.color = "#ef4444";
+	if (!API_BASE_URL) {
+		adminLoginStatus.textContent = "GitHub Pages साठी config.js मध्ये apiBaseUrl set करा (उदा. Render URL).";
+		adminLoginStatus.style.color = "#ef4444";
+	}
 }
 
 let enrollmentCache = [];
@@ -212,7 +216,7 @@ async function loadOverview() {
 	await checkServerHealth();
 
 	try {
-		const response = await fetch("/api/admin/overview", {
+		const response = await fetch(apiUrl("/api/admin/overview"), {
 			headers: {
 				"x-admin-pin": activeAdminPin,
 			},
@@ -262,7 +266,7 @@ async function loginAdmin() {
 	adminLoginStatus.style.color = "#2563eb";
 
 	try {
-		const response = await fetch("/api/admin/login", {
+		const response = await fetch(apiUrl("/api/admin/login"), {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -339,7 +343,7 @@ function updateLiveUi(isOnline) {
 
 async function checkServerHealth() {
 	try {
-		const response = await fetch("/api/health");
+		const response = await fetch(apiUrl("/api/health"));
 		if (!response.ok) {
 			updateLiveUi(false);
 			return false;

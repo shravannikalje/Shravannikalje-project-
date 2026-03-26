@@ -31,6 +31,25 @@ This project is now upgraded to a **full-stack version** with:
 2. Start server
 3. Open browser at `http://localhost:3000`
 
+## Deploy Backend (Render) + Connect GitHub Pages
+
+1. Push this project to GitHub (already done)
+2. In Render, create a new **Web Service** from this repo
+3. Render auto-detects `render.yaml` and deploys backend
+4. Copy deployed backend URL (example: `https://ciit-backend.onrender.com`)
+5. Edit `config.js` and set:
+
+```js
+window.CIIT_CONFIG = {
+  apiBaseUrl: "https://your-render-backend-url.onrender.com",
+};
+```
+
+6. Commit + push `config.js`
+7. GitHub Pages site will then use live backend APIs for enrollments/admin
+
+> Note: GitHub Pages hosts only static frontend. Backend must run separately (Render/Railway/etc.).
+
 ## API Endpoints
 
 - `GET /api/health` - health status

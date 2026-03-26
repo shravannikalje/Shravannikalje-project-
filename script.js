@@ -1,5 +1,7 @@
 const themeToggle = document.getElementById("themeToggle");
 const body = document.body;
+const API_BASE_URL = (window.CIIT_CONFIG?.apiBaseUrl || "").replace(/\/$/, "");
+const apiUrl = (path) => `${API_BASE_URL}${path}`;
 
 const savedTheme = localStorage.getItem("ciit-theme");
 if (savedTheme === "dark") {
@@ -235,7 +237,7 @@ enrollForm?.addEventListener("submit", async (event) => {
 	status.style.color = "#2563eb";
 
 	try {
-		const response = await fetch("/api/enrollments", {
+		const response = await fetch(apiUrl("/api/enrollments"), {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

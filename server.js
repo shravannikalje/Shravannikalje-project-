@@ -1,12 +1,27 @@
 const express = require("express");
+const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
 
 const app = express();
-const PORT = 3000;
-const ADMIN_PIN = "7823";
+const PORT = Number(process.env.PORT || 3000);
+const ADMIN_PIN = process.env.ADMIN_PIN || "7823";
 const MAX_LOGIN_ATTEMPTS = 5;
 const LOGIN_LOCK_MS = 5 * 60 * 1000;
+
+const configuredOrigins = (process.env.ALLOWED_ORIGINS || "")
+	.split(",")
+	.map((origin) => origin.trim())
+	.filter(Boolean);
+
+const allowedOrigins = new Set([
+	"http://localhost:3000",
+	"http://127.0.0.1:3000",
+	"http://localhost:5500",
+	"http://127.0.0.1:5500",
+	"https://shravannikalje.github.io",
+	...configuredOrigins,
+]);
 
 const dataFile = path.join(__dirname, "data", "enrollments.json");
 const metricsFile = path.join(__dirname, "data", "metrics.json");
@@ -90,6 +105,15 @@ function getTodayKey() {
 }
 
 app.use(express.json());
+app.use(cors({
+	origin(origin, callback) {
+		if (!origin || allowedOrigins.has(origin)) {
+			callback(null, true);
+			return;
+		}
+		callback(new Error("CORS blocked for this origin"));
+	},
+}));
 
 app.get(["/", "/index.html"], (req, res, next) => {
 	const metrics = readMetrics();
