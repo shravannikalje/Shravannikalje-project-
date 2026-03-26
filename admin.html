@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CIIT Admin Dashboard for enrollment management">
+  <title>CIIT Admin Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="header" role="banner">
+    <div class="brand">CIIT Admin Dashboard</div>
+    <nav aria-label="Admin navigation">
+      <a href="index.html">Home</a>
+      <button id="adminLogoutButton" class="btn admin-logout-btn admin-hidden" type="button">Logout</button>
+      <button id="themeToggle" type="button" aria-label="Toggle dark mode">🌙</button>
+    </nav>
+  </header>
+
+  <main class="block">
+    <section id="adminLoginSection" class="admin-login-wrap">
+      <h2>Admin Login</h2>
+      <div class="form admin-login-card">
+        <label for="adminPin">Enter Admin PIN</label>
+        <input id="adminPin" type="password" inputmode="numeric" maxlength="4" placeholder="Enter PIN (e.g. 7823)">
+        <button id="adminLoginButton" class="btn primary" type="button">Unlock Dashboard</button>
+        <p id="adminLoginStatus" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section id="adminDashboardSection" class="admin-hidden">
+      <h2>Enrollment Overview</h2>
+      <div class="live-status-row">
+        <div class="live-chip" id="serverLiveChip">
+          <span class="live-dot" id="serverLiveDot"></span>
+          <span id="serverLiveText">Checking server...</span>
+        </div>
+        <div class="live-actions">
+          <button id="refreshNowBtn" class="btn" type="button">Refresh Now</button>
+          <span id="lastUpdatedText" class="last-updated">Last updated: --</span>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <article class="card stat-card">
+          <h3>Total Visitors</h3>
+          <p id="totalVisitors">0</p>
+        </article>
+        <article class="card stat-card">
+          <h3>Total Enrollments</h3>
+          <p id="totalCount">0</p>
+        </article>
+        <article class="card stat-card">
+          <h3>Top Course</h3>
+          <p id="topCourse">-</p>
+        </article>
+        <article class="card stat-card">
+          <h3>Latest Entry</h3>
+          <p id="latestEntry">-</p>
+        </article>
+      </div>
+
+      <div class="chart-wrap admin-chart-wrap">
+        <canvas id="visitorTrendChart" aria-label="Daily visitor trend"></canvas>
+      </div>
+    </section>
+
+    <section class="block admin-records admin-hidden" id="adminRecordsSection">
+      <div class="section-head">
+        <h2>All Queries / Enrollment Records</h2>
+        <div class="admin-actions">
+          <input id="querySearch" class="searchInput" type="text" placeholder="Search by name/email/course">
+          <button id="exportCsv" class="btn" type="button">Export CSV</button>
+        </div>
+      </div>
+      <p id="adminStatus" aria-live="polite" class="search-feedback"></p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Course</th>
+              <th>Created At</th>
+            </tr>
+          </thead>
+          <tbody id="enrollmentTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 CIIT Training Institute — Admin Console</p>
+  </footer>
+
+  <div id="adminToast" class="admin-toast" role="status" aria-live="polite"></div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

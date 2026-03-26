@@ -1,0 +1,23 @@
+{
+  "name": "ciit-training-institute",
+  "version": "1.0.0",
+  "description": "Professional CIIT website with API-backed enrollments and admin dashboard",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "backup:index": "powershell -ExecutionPolicy Bypass -File ./tools/backup-index.ps1",
+    "restore:index": "powershell -ExecutionPolicy Bypass -File ./tools/restore-index.ps1"
+  },
+  "keywords": [
+    "ciit",
+    "training",
+    "institute",
+    "dashboard"
+  ],
+  "author": "Shravan Nikalje",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
