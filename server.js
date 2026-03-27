@@ -23,6 +23,15 @@ const allowedOrigins = new Set([
 	...configuredOrigins,
 ]);
 
+function isAllowedOrigin(origin) {
+	if (!origin) return true;
+	if (allowedOrigins.has(origin)) return true;
+	if (/^https:\/\/[a-z0-9-]+\.github\.io$/i.test(origin)) return true;
+	if (/^http:\/\/localhost:\d+$/i.test(origin)) return true;
+	if (/^http:\/\/127\.0\.0\.1:\d+$/i.test(origin)) return true;
+	return false;
+}
+
 const dataFile = path.join(__dirname, "data", "enrollments.json");
 const metricsFile = path.join(__dirname, "data", "metrics.json");
 const loginAttempts = new Map();
@@ -71,6 +80,14 @@ function writeEnrollments(enrollments) {
 	fs.writeFileSync(dataFile, JSON.stringify(enrollments, null, 2), "utf-8");
 }
 
+function sortEnrollmentsNewestFirst(enrollments) {
+	return [...(enrollments || [])].sort((a, b) => {
+		const timeA = Date.parse(a?.createdAt || "") || 0;
+		const timeB = Date.parse(b?.createdAt || "") || 0;
+		return timeB - timeA;
+	});
+}
+
 function readMetrics() {
 	try {
 		const raw = fs.readFileSync(metricsFile, "utf-8");
@@ -107,7 +124,7 @@ function getTodayKey() {
 app.use(express.json());
 app.use(cors({
 	origin(origin, callback) {
-		if (!origin || allowedOrigins.has(origin)) {
+		if (isAllowedOrigin(origin)) {
 			callback(null, true);
 			return;
 		}
@@ -184,7 +201,7 @@ app.get("/api/admin/overview", (req, res) => {
 		return res.status(401).json({ message: "Unauthorized" });
 	}
 
-	const enrollments = readEnrollments();
+	const enrollments = sortEnrollmentsNewestFirst(readEnrollments());
 	const metrics = readMetrics();
 
 	return res.json({

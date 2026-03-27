@@ -1,5 +1,5 @@
 window.CIIT_CONFIG = {
-  // Set your deployed backend URL here (example: "https://ciit-backend.onrender.com")
-  // Keep empty string for same-origin (local server mode)
+  // Optional: set deployed backend URL manually (example: "https://<service>.onrender.com")
+  // Keep empty for local same-origin mode. GitHub Pages fallback is handled in script files.
   apiBaseUrl: "",
 };

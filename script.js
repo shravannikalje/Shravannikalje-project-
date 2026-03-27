@@ -1,6 +1,27 @@
 const themeToggle = document.getElementById("themeToggle");
 const body = document.body;
-const API_BASE_URL = (window.CIIT_CONFIG?.apiBaseUrl || "").replace(/\/$/, "");
+const DEFAULT_GITHUB_BACKEND = "https://ciit-backend.onrender.com";
+function resolveApiBaseUrl() {
+	const configured = String(window.CIIT_CONFIG?.apiBaseUrl || "").trim().replace(/\/$/, "");
+	if (configured) return configured;
+
+	const { hostname, port, protocol } = window.location;
+	if (hostname.endsWith("github.io")) {
+		return DEFAULT_GITHUB_BACKEND;
+	}
+
+	if (protocol === "file:") {
+		return "http://localhost:3000";
+	}
+
+	if ((hostname === "localhost" || hostname === "127.0.0.1") && port && port !== "3000") {
+		return `http://${hostname}:3000`;
+	}
+
+	return "";
+}
+
+const API_BASE_URL = resolveApiBaseUrl();
 const apiUrl = (path) => `${API_BASE_URL}${path}`;
 
 const savedTheme = localStorage.getItem("ciit-theme");

@@ -2,7 +2,28 @@ const themeToggle = document.getElementById("themeToggle");
 const body = document.body;
 
 const ADMIN_STORAGE_KEY = "ciit-admin-pin";
-const API_BASE_URL = (window.CIIT_CONFIG?.apiBaseUrl || "").replace(/\/$/, "");
+const DEFAULT_GITHUB_BACKEND = "https://ciit-backend.onrender.com";
+function resolveApiBaseUrl() {
+	const configured = String(window.CIIT_CONFIG?.apiBaseUrl || "").trim().replace(/\/$/, "");
+	if (configured) return configured;
+
+	const { hostname, port, protocol } = window.location;
+	if (hostname.endsWith("github.io")) {
+		return DEFAULT_GITHUB_BACKEND;
+	}
+
+	if (protocol === "file:") {
+		return "http://localhost:3000";
+	}
+
+	if ((hostname === "localhost" || hostname === "127.0.0.1") && port && port !== "3000") {
+		return `http://${hostname}:3000`;
+	}
+
+	return "";
+}
+
+const API_BASE_URL = resolveApiBaseUrl();
 const apiUrl = (path) => `${API_BASE_URL}${path}`;
 const IS_GITHUB_PAGES = window.location.hostname.endsWith("github.io");
 
@@ -55,6 +76,25 @@ let visitorChart = null;
 let activeAdminPin = localStorage.getItem(ADMIN_STORAGE_KEY) || "";
 let autoRefreshTimer = null;
 let lastKnownEnrollmentCount = 0;
+
+function toSafeText(value) {
+	if (value === null || value === undefined) return "-";
+	const str = String(value);
+	return str
+		.replaceAll("&", "&amp;")
+		.replaceAll("<", "&lt;")
+		.replaceAll(">", "&gt;")
+		.replaceAll('"', "&quot;")
+		.replaceAll("'", "&#39;");
+}
+
+function getSortedEnrollments(enrollments) {
+	return [...(enrollments || [])].sort((a, b) => {
+		const timeA = Date.parse(a?.createdAt || "") || 0;
+		const timeB = Date.parse(b?.createdAt || "") || 0;
+		return timeB - timeA;
+	});
+}
 
 function showToast(message, type = "info") {
 	if (!adminToast) return;
@@ -111,13 +151,14 @@ function renderTable(enrollments) {
 
 	enrollments.forEach((entry) => {
 		const row = document.createElement("tr");
-		const date = new Date(entry.createdAt).toLocaleString();
+		const createdAtMs = Date.parse(entry?.createdAt || "");
+		const date = Number.isNaN(createdAtMs) ? "-" : new Date(createdAtMs).toLocaleString();
 		row.innerHTML = `
-			<td>${entry.name}</td>
-			<td>${entry.email}</td>
-			<td>${entry.phone}</td>
-			<td>${entry.course}</td>
-			<td>${date}</td>
+			<td>${toSafeText(entry?.name)}</td>
+			<td>${toSafeText(entry?.email)}</td>
+			<td>${toSafeText(entry?.phone)}</td>
+			<td>${toSafeText(entry?.course)}</td>
+			<td>${toSafeText(date)}</td>
 		`;
 		tableBody.appendChild(row);
 	});
@@ -171,11 +212,15 @@ function applyQueryFilter() {
 	}
 
 	const filtered = enrollmentCache.filter((entry) => {
+		const name = String(entry?.name || "").toLowerCase();
+		const email = String(entry?.email || "").toLowerCase();
+		const course = String(entry?.course || "").toLowerCase();
+		const phone = String(entry?.phone || "").toLowerCase();
 		return (
-			entry.name.toLowerCase().includes(term)
-			|| entry.email.toLowerCase().includes(term)
-			|| entry.course.toLowerCase().includes(term)
-			|| entry.phone.toLowerCase().includes(term)
+			name.includes(term)
+			|| email.includes(term)
+			|| course.includes(term)
+			|| phone.includes(term)
 		);
 	});
 
@@ -227,7 +272,7 @@ async function loadOverview() {
 			throw new Error(payload.message || "Failed to load data");
 		}
 
-		enrollmentCache = payload.enrollments || [];
+		enrollmentCache = getSortedEnrollments(payload.enrollments || []);
 		const currentCount = enrollmentCache.length;
 		if (lastKnownEnrollmentCount > 0 && currentCount > lastKnownEnrollmentCount) {
 			const newEntries = currentCount - lastKnownEnrollmentCount;

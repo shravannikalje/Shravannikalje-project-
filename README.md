@@ -31,13 +31,33 @@ This project is now upgraded to a **full-stack version** with:
 2. Start server
 3. Open browser at `http://localhost:3000`
 
+## Free Domain Setup (No paid domain needed)
+
+- Frontend free domain: GitHub Pages URL
+  - `https://shravannikalje.github.io/Shravannikalje-project-/`
+- Backend free domain: Render free subdomain (example)
+  - `https://ciit-backend.onrender.com`
+
+> Admin PIN is `7823`. Admin dashboard opens with this PIN and shows all queries from backend.
+
+## Admin Panel Troubleshooting
+
+If `admin.html` does not open data or login fails, check these first:
+
+- Ensure backend server is running (`npm start`) and `http://localhost:3000/api/health` returns OK.
+- Use PIN `7823` (or your `ADMIN_PIN` env value in deployment).
+- For local frontend on other ports (like `5500`, `5501`, etc.), backend API auto-fallback uses `http://localhost:3000`.
+- If deployed on GitHub Pages, keep backend live on Render (or set `window.CIIT_CONFIG.apiBaseUrl` in `config.js`).
+- If login is rate-limited after wrong PIN attempts, wait 5 minutes and try again.
+
 ## Deploy Backend (Render) + Connect GitHub Pages
 
 1. Push this project to GitHub (already done)
 2. In Render, create a new **Web Service** from this repo
 3. Render auto-detects `render.yaml` and deploys backend
-4. Copy deployed backend URL (example: `https://ciit-backend.onrender.com`)
-5. Edit `config.js` and set:
+4. Deploy service name as `ciit-backend` (or your preferred name)
+5. Copy deployed backend URL (example: `https://ciit-backend.onrender.com`)
+6. Edit `config.js` and set (optional; auto-fallback is already present for GitHub Pages):
 
 ```js
 window.CIIT_CONFIG = {
@@ -45,8 +65,8 @@ window.CIIT_CONFIG = {
 };
 ```
 
-6. Commit + push `config.js`
-7. GitHub Pages site will then use live backend APIs for enrollments/admin
+7. Commit + push `config.js`
+8. GitHub Pages site will then use live backend APIs for enrollments/admin
 
 > Note: GitHub Pages hosts only static frontend. Backend must run separately (Render/Railway/etc.).
 
