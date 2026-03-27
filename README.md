@@ -31,6 +31,21 @@ This project is now upgraded to a **full-stack version** with:
 2. Start server
 3. Open browser at `http://localhost:3000`
 
+## Quick Links (GitHub + Live)
+
+- GitHub Repository:
+  - `https://github.com/shravannikalje/Shravannikalje-project-`
+- Live Frontend (GitHub Pages):
+  - `https://shravannikalje.github.io/Shravannikalje-project-/`
+- Live Admin Dashboard:
+  - `https://shravannikalje.github.io/Shravannikalje-project-/admin.html`
+- Backend Health (Render):
+  - `https://ciit-backend.onrender.com/api/health`
+- Render Dashboard:
+  - `https://dashboard.render.com/`
+
+> Tip: If admin data is not visible, check backend health URL first.
+
 ## Free Domain Setup (No paid domain needed)
 
 - Frontend free domain: GitHub Pages URL
