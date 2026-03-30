@@ -7,6 +7,6 @@ services:
     startCommand: npm start
     envVars:
       - key: ADMIN_PIN
-        value: "7823"
+        sync: false
       - key: ALLOWED_ORIGINS
         value: "https://shravannikalje.github.io"

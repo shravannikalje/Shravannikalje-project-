@@ -53,14 +53,14 @@ This project is now upgraded to a **full-stack version** with:
 - Backend free domain: Render free subdomain (example)
   - `https://ciit-backend.onrender.com`
 
-> Admin PIN is `7823`. Admin dashboard opens with this PIN and shows all queries from backend.
+> Admin PIN is configured via environment variable `ADMIN_PIN`.
 
 ## Admin Panel Troubleshooting
 
 If `admin.html` does not open data or login fails, check these first:
 
 - Ensure backend server is running (`npm start`) and `http://localhost:3000/api/health` returns OK.
-- Use PIN `7823` (or your `ADMIN_PIN` env value in deployment).
+- Use your configured `ADMIN_PIN` value in deployment/local env.
 - For local frontend on other ports (like `5500`, `5501`, etc.), backend API auto-fallback uses `http://localhost:3000`.
 - If deployed on GitHub Pages, keep backend live on Render (or set `window.CIIT_CONFIG.apiBaseUrl` in `config.js`).
 - If login is rate-limited after wrong PIN attempts, wait 5 minutes and try again.

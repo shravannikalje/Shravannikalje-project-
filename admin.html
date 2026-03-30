@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="CIIT Admin Dashboard for enrollment management">
-  <title>CIIT Admin Dashboard</title>
+  <meta name="description" content="CIIT Unified Dashboard for full website content and enrollment management">
+  <title>CIIT Unified Dashboard</title>
   <link rel="stylesheet" href="styles.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <header class="header" role="banner">
-    <div class="brand">CIIT Admin Dashboard</div>
+    <div class="brand">CIIT Unified Dashboard</div>
     <nav aria-label="Admin navigation">
       <a href="index.html">Home</a>
       <button id="adminLogoutButton" class="btn admin-logout-btn admin-hidden" type="button">Logout</button>
@@ -20,17 +20,17 @@
 
   <main class="block">
     <section id="adminLoginSection" class="admin-login-wrap">
-      <h2>Admin Login</h2>
+      <h2>Dashboard Login</h2>
       <div class="form admin-login-card">
         <label for="adminPin">Enter Admin PIN</label>
-        <input id="adminPin" type="password" inputmode="numeric" maxlength="4" placeholder="Enter PIN (e.g. 7823)">
-        <button id="adminLoginButton" class="btn primary" type="button">Unlock Dashboard</button>
+        <input id="adminPin" type="password" inputmode="numeric" maxlength="12" placeholder="Enter Admin PIN" autocomplete="current-password">
+        <button id="adminLoginButton" class="btn primary" type="button">Open Dashboard</button>
         <p id="adminLoginStatus" aria-live="polite"></p>
       </div>
     </section>
 
     <section id="adminDashboardSection" class="admin-hidden">
-      <h2>Enrollment Overview</h2>
+      <h2>Website & Enrollment Overview</h2>
       <div class="live-status-row">
         <div class="live-chip" id="serverLiveChip">
           <span class="live-dot" id="serverLiveDot"></span>
@@ -59,10 +59,61 @@
           <h3>Latest Entry</h3>
           <p id="latestEntry">-</p>
         </article>
+        <article class="card stat-card">
+          <h3>New Queries</h3>
+          <p id="newQueryCount">0</p>
+          <button id="markSeenBtn" class="btn btn-mini" type="button">Mark All Seen</button>
+        </article>
       </div>
 
       <div class="chart-wrap admin-chart-wrap">
         <canvas id="visitorTrendChart" aria-label="Daily visitor trend"></canvas>
+      </div>
+    </section>
+
+    <section class="block admin-records admin-hidden" id="contentManagerSection">
+      <div class="section-head">
+        <h2>Website Content Manager</h2>
+        <div class="admin-actions">
+          <button id="reloadContentBtn" class="btn" type="button">Reload Content</button>
+          <button id="saveContentBtn" class="btn primary" type="button">Save Website Content</button>
+        </div>
+      </div>
+      <p id="contentStatus" aria-live="polite" class="search-feedback"></p>
+      <div class="editor-grid">
+        <div class="form">
+          <label for="admissionTextInput">Admission Strip Text</label>
+          <input id="admissionTextInput" type="text" placeholder="Admission banner text">
+
+          <label for="heroBadgeInput">Hero Badge</label>
+          <input id="heroBadgeInput" type="text" placeholder="Hero badge text">
+
+          <label for="heroTitleInput">Hero Title</label>
+          <input id="heroTitleInput" type="text" placeholder="Hero title">
+
+          <label for="heroSubtitleInput">Hero Subtitle</label>
+          <input id="heroSubtitleInput" type="text" placeholder="Hero subtitle">
+
+          <label for="highlightsInput">Highlights (one per line)</label>
+          <textarea id="highlightsInput" rows="5" placeholder="10,000+ Students Trained"></textarea>
+
+          <label for="futureDirectionsInput">Future Directions (one per line)</label>
+          <textarea id="futureDirectionsInput" rows="5" placeholder="Industry 4.0 & Innovation Centers"></textarea>
+        </div>
+
+        <div class="form">
+          <label for="officersInput">Officers (one per line: Name | Role)</label>
+          <textarea id="officersInput" rows="6" placeholder="Shravan Nikalje | Student Coordinator"></textarea>
+
+          <label for="festivalsInput">Festivals/Events (one per line)</label>
+          <textarea id="festivalsInput" rows="5" placeholder="Tech Fest 2026"></textarea>
+
+          <label for="coursesInput">Courses (one per line: Course | Duration | Module1, Module2)</label>
+          <textarea id="coursesInput" rows="8" placeholder="Java Full Stack | 6 Months | Core Java, Spring Boot, React"></textarea>
+
+          <label for="placementsInput">Placements (one per line: Name | Company | Technology | Package)</label>
+          <textarea id="placementsInput" rows="8" placeholder="Akshay Pawar | Rabbit & Tortoise | Dot Net | 3.5 LPA"></textarea>
+        </div>
       </div>
     </section>
 
@@ -71,6 +122,15 @@
         <h2>All Queries / Enrollment Records</h2>
         <div class="admin-actions">
           <input id="querySearch" class="searchInput" type="text" placeholder="Search by name/email/course">
+          <select id="queryCourseFilter" class="searchInput" aria-label="Filter by course">
+            <option value="all">All Courses</option>
+          </select>
+          <select id="queryDateFilter" class="searchInput" aria-label="Filter by date range">
+            <option value="all">All Time</option>
+            <option value="today">Today</option>
+            <option value="7d">Last 7 Days</option>
+            <option value="30d">Last 30 Days</option>
+          </select>
           <button id="exportCsv" class="btn" type="button">Export CSV</button>
         </div>
       </div>
@@ -84,6 +144,7 @@
               <th>Phone</th>
               <th>Course</th>
               <th>Created At</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody id="enrollmentTableBody"></tbody>
@@ -93,7 +154,7 @@
   </main>
 
   <footer class="footer">
-    <p>© 2026 CIIT Training Institute — Admin Console</p>
+    <p>© 2026 CIIT Training Institute — Unified Dashboard</p>
   </footer>
 
   <div id="adminToast" class="admin-toast" role="status" aria-live="polite"></div>

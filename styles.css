@@ -183,6 +183,21 @@ body {
   border-color: transparent;
 }
 
+.btn-mini {
+  padding: 6px 10px;
+  font-size: 0.82rem;
+}
+
+.btn-danger {
+  background: #ef4444;
+  color: #fff;
+  border-color: transparent;
+}
+
+.btn-danger:hover {
+  opacity: 0.92;
+}
+
 .block {
   max-width: 1100px;
   margin: 0 auto;
@@ -353,6 +368,7 @@ body {
 
 .form input,
 .form select,
+.form textarea,
 .form button {
   border: 1px solid var(--border);
   border-radius: 10px;
@@ -367,6 +383,12 @@ body {
   color: #fff;
   border-color: transparent;
   font-weight: 700;
+}
+
+.form textarea {
+  resize: vertical;
+  min-height: 92px;
+  font-family: inherit;
 }
 
 #formStatus {
@@ -449,6 +471,10 @@ tbody tr:nth-child(even) { background: rgba(148, 163, 184, 0.08); }
   font-weight: 700;
 }
 
+#markSeenBtn {
+  margin-top: 8px;
+}
+
 .admin-records {
   padding-left: 0;
   padding-right: 0;
@@ -477,6 +503,12 @@ tbody tr:nth-child(even) { background: rgba(148, 163, 184, 0.08); }
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+.editor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 14px;
 }
 
 .live-status-row {

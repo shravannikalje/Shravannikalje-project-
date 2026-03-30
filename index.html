@@ -17,33 +17,32 @@
 		<nav aria-label="Primary navigation">
 			<a href="#courses">Courses</a>
 			<a href="#future">Future</a>
+			<a href="#officers">Officers</a>
+			<a href="#festivals">Festivals</a>
 			<a href="#enroll">Enroll</a>
 			<a href="#placements">Placements</a>
-			<a href="admin.html">Admin</a>
+			<a href="admin.html">Dashboard</a>
 			<button id="themeToggle" type="button" aria-label="Toggle dark mode">🌙</button>
 		</nav>
 	</header>
 
 	<main id="mainContent">
 		<section id="admission" class="admission-strip" aria-label="Admission updates">
-			<p>🎓 Admission Open Now • Apply Today • Limited Seats</p>
+			<p id="admissionText">🎓 Admission Open Now • Apply Today • Limited Seats</p>
 		</section>
 
 		<section class="hero" aria-labelledby="heroTitle">
-			<p class="hero-badge">🚀 Career Launchpad Since 2010</p>
+			<p id="heroBadgeText" class="hero-badge">🚀 Career Launchpad Since 2010</p>
 			<h1 id="heroTitle">Learn. Build. Get Placed.</h1>
-			<p>Live projects + interview preparation + placement support</p>
+			<p id="heroSubtitleText">Live projects + interview preparation + placement support</p>
 			<div class="cta">
 				<a href="#enroll" class="btn primary">Enroll Now</a>
 				<a href="#courses" class="btn">Explore Courses</a>
 			</div>
 		</section>
 
-		<section class="brand-strip" aria-label="Institute highlights">
+		<section id="highlightStrip" class="brand-strip" aria-label="Institute highlights">
 			<div class="brand-item"><strong>10,000+</strong> Students Trained</div>
-			<div class="brand-item"><strong>500+</strong> Placement Drives</div>
-			<div class="brand-item"><strong>15+</strong> Career-Oriented Courses</div>
-			<div class="brand-item"><strong>4.8/5</strong> Learner Rating</div>
 		</section>
 
 		<section id="courses" class="block">
@@ -56,23 +55,7 @@
 				</div>
 			</div>
 
-			<div id="courseGrid" class="grid">
-				<article class="card" data-course=".NET Full Stack">.NET Full Stack</article>
-				<article class="card" data-course="Java Full Stack">Java Full Stack</article>
-				<article class="card" data-course="Python Full Stack">Python Full Stack</article>
-				<article class="card" data-course="MEAN Stack">MEAN Stack</article>
-				<article class="card" data-course="MERN Stack">MERN Stack</article>
-				<article class="card" data-course="Software Testing">Software Testing</article>
-				<article class="card" data-course="Data Science & Analytics">Data Science & Analytics</article>
-				<article class="card" data-course="Digital Marketing">Digital Marketing</article>
-				<article class="card" data-course="Cloud Computing">Cloud Computing</article>
-				<article class="card" data-course="ReactJS">ReactJS</article>
-				<article class="card" data-course="Angular">Angular</article>
-				<article class="card" data-course="DBA">DBA</article>
-				<article class="card" data-course="RDBMS">RDBMS</article>
-				<article class="card" data-course="C++ Programming">C++ Programming</article>
-				<article class="card" data-course="Real Time Project">Real Time Project</article>
-			</div>
+			<div id="courseGrid" class="grid"></div>
 
 			<p class="course-helper">👉 कोणत्याही course card वर click करा आणि syllabus बघा.</p>
 
@@ -91,12 +74,17 @@
 
 		<section id="future" class="block">
 			<h2>Future Directions</h2>
-			<div class="grid">
-				<article class="card">Industry 4.0 & Innovation Centers</article>
-				<article class="card">Global Skill Development</article>
-				<article class="card">Placement Expansion</article>
-				<article class="card">Future‑Ready Vision</article>
-			</div>
+			<div id="futureGrid" class="grid"></div>
+		</section>
+
+		<section id="officers" class="block">
+			<h2>Officers</h2>
+			<div id="officersGrid" class="grid"></div>
+		</section>
+
+		<section id="festivals" class="block">
+			<h2>Festivals & Events</h2>
+			<div id="festivalsGrid" class="grid"></div>
 		</section>
 
 		<section id="enroll" class="block">
@@ -114,21 +102,6 @@
 				<label for="course">Course</label>
 				<select id="course" required>
 					<option value="">Select Course</option>
-					<option>.NET Full Stack</option>
-					<option>Java Full Stack</option>
-					<option>Python Full Stack</option>
-					<option>MEAN Stack</option>
-					<option>MERN Stack</option>
-					<option>Software Testing</option>
-					<option>Data Science & Analytics</option>
-					<option>Digital Marketing</option>
-					<option>Cloud Computing</option>
-					<option>ReactJS</option>
-					<option>Angular</option>
-					<option>DBA</option>
-					<option>RDBMS</option>
-					<option>C++ Programming</option>
-					<option>Real Time Project</option>
 				</select>
 
 				<button type="submit" class="btn primary">Submit</button>
@@ -152,18 +125,7 @@
 							<th>Package</th>
 						</tr>
 					</thead>
-					<tbody id="placementsTable">
-						<tr><td>Rupesh Dhabarde</td><td>Perpetituut Technosoft</td><td>Dot Net</td><td>6.2 LPA</td></tr>
-						<tr><td>Akshay Pawar</td><td>Rabbit & Tortoise</td><td>Dot Net</td><td>3.5 LPA</td></tr>
-						<tr><td>Pratiksha Phadatare</td><td>Rabbit & Tortoise</td><td>Dot Net</td><td>3.5 LPA</td></tr>
-						<tr><td>Akash Supelkar</td><td>Avenitrinnovative</td><td>Dot Net</td><td>3.5 LPA</td></tr>
-						<tr><td>Nilesh More</td><td>Height Technologies</td><td>Dot Net</td><td>4.5 LPA</td></tr>
-						<tr><td>Datta Shinde</td><td>Optical ARC</td><td>Front End Developer</td><td>2.18 LPA</td></tr>
-						<tr><td>Sariket Bhujbal</td><td>Infosys</td><td>Dot Net</td><td>4.3 LPA</td></tr>
-						<tr><td>Snehal</td><td>Snow White</td><td>MEAN Stack</td><td>4.5 LPA</td></tr>
-						<tr><td>Yogita Ghorad</td><td>Agilad Technologies Pvt Ltd</td><td>Dot Net</td><td>2.5 LPA</td></tr>
-						<tr><td>Akash Bhujbal</td><td>Assentex</td><td>Dot Net</td><td>3.5 LPA</td></tr>
-					</tbody>
+					<tbody id="placementsTable"></tbody>
 				</table>
 			</div>
 		</section>
